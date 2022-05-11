@@ -6,8 +6,5 @@ import lombok.Data;
 public class QuantityDTO {
 	private Integer bookId;
 	private int quantity;
-	public QuantityDTO() {
-		super();
-	}
 	
 }

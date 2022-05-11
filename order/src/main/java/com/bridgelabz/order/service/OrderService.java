@@ -31,30 +31,30 @@ public class OrderService implements IOrderService{
 	//to place the order in book store
 	@Override
 	public Order addOrder(OrderDTO dto) {
-		Object user = restTemplate.getForObject("http://localhost:9000/user/findById/" + dto.getUserId(), Object.class);
+		Object user = restTemplate.getForObject("http://localhost:8087/user/findById/" + dto.getUserId(), Object.class);
 		if(user.equals(null)) {
 			throw new UserException("Invalid user id...please provide valid user id");
 		}
-		else 
+		else
 		{
 			Book book = restTemplate.getForObject("http://localhost:9001/Book/getBook/" + dto.getBookId(), Book.class);
-			if(book.equals(null)) 
+			if(book.equals(null))
 			{
 				throw new BookException("Invalid book id...please provide valid book id");
-			}			
-			else 
+			}
+			else
 			{
 				if((int)dto.getQuantity()>(int)book.getQuantity())
 				{
 				throw new BookException("Currently we dont have that much books available");
 				}
-					else 
-					{	
+					else
+					{
 						Order order = new Order(dto);
 					order.setPrice(dto.getQuantity()*book.getPrice());
 					order.setDate(LocalDate.now());
 					repo.save(order);
-					return order;	
+					return order;
 				}
 			}
 		}

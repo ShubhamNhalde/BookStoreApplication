@@ -1,11 +1,8 @@
 package com.bridgelabz.book.Service;
 
-
-
 import java.util.List;
 
 import com.bridgelabz.book.dto.BookDTO;
-import com.bridgelabz.book.dto.QuantityDTO;
 import com.bridgelabz.book.model.Book;
 
 public interface IBookService {
@@ -27,9 +24,7 @@ public interface IBookService {
 	List<Book> sortBooksAsc();
 	
 	List<Book> sortBooksDesc();
-	
-	Book updateQuantity(QuantityDTO dto);
-	
-	Book getbookByIdAPI(Integer bookId);
+
+    Book updateBookQuantity(int bookId, int bookQuantity);
 	
 }

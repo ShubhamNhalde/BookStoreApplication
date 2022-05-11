@@ -8,7 +8,6 @@ import com.bridgelabz.order.model.Order;
 
 public interface IOrderService{
 
-//	public User insertOrder(Integer id);
 
 	 Order addOrder(OrderDTO dto);
 

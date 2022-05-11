@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.bridgelabz.book.dto.ResponseDTO;
 
 
-@ControllerAdvice									// <- whenever controller gets in trouble he looks for solution in
-public class BookExceptionalHandler {				//    @ControllerAdvice
+@ControllerAdvice
+public class BookExceptionalHandler {
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ResponseDTO> handlerMethodArgumentNotValidException(MethodArgumentNotValidException exception){
 		
-		List<ObjectError> errorList=exception.getBindingResult().getAllErrors(); //<- binds all the errors & exceptions  and stores in error list,
-		List<String> errMesg = errorList.stream()								 //and handles the validation part & showing the issues in REST call
-							.map(objErr->objErr.getDefaultMessage())		
+		List<ObjectError> errorList=exception.getBindingResult().getAllErrors();
+		List<String> errMesg = errorList.stream()
+							.map(objErr->objErr.getDefaultMessage())
 							.collect(Collectors.toList());
 		ResponseDTO responseDTO = new ResponseDTO("Exception while processing REST requests",errMesg);
 		return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.BAD_REQUEST);

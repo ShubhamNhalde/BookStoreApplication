@@ -26,6 +26,4 @@ public interface IUserService {
 
 	User changePassword(UserDTO dto);
 
-	User getByIdAPI(Integer userId);
-
 }

@@ -6,12 +6,10 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.bridgelabz.cart.dto.CartDTO;
-import com.bridgelabz.cart.dto.QuantityDTO;
 import com.bridgelabz.cart.exceptions.CartException;
 import com.bridgelabz.cart.model.Cart;
 import com.bridgelabz.cart.repository.CartRepository;
@@ -21,13 +19,7 @@ public class CartService implements ICartService{
 	
 	@Autowired
 	CartRepository repo;
-	
-	@Autowired
-	RestTemplate restTemplate;
-	
-	@Autowired
-	LoadBalancerClient loadBalancerClient;
-	
+
 	//to insert items in cart
 	@Override
 	public Cart insertToCart(@Valid CartDTO dto) {
@@ -69,18 +61,6 @@ public class CartService implements ICartService{
 			throw new CartException("cart not found");
 		}
 	}
-	
-	//update quantity of books using cart id
-	@Override
-	public Cart updateQuantity(QuantityDTO dto) {
-		Optional<Cart> cart = repo.findById(dto.getCartID());
-		if(cart.isEmpty()) {
-			throw new CartException("Invalid CartID..please input valid Id");
-		}
-		cart.get().setQuantity(dto.getQuantity());
-		repo.save(cart.get());
-		return cart.get();
-	}
 
 	@Override
 	public Cart deleteById(Integer cartId) {
@@ -91,19 +71,7 @@ public class CartService implements ICartService{
 		repo.deleteById(cartId);
 		return cart.get();
 	}
-	
-	
-	
 
-
-//	public String callUserAndRetrieve(Integer Userid) {
-//		return restTemplate.getForObject("http://localhost:8080/user/findbyid/"+Userid, String.class);
-//	}
-//	
-//	public UserModel callUserAndRetrieveObject(Integer Userid) {
-//		UserModel user = restTemplate.getForObject("http://localhost:8080/user/findbyid/"+Userid, UserModel.class);
-//		return user;
-//	}
 }
 
 

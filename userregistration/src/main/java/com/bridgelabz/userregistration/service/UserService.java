@@ -36,7 +36,7 @@ public class UserService implements IUserService{
 		repo.save(user);
 		String token = tokenUtil.createToken(user.getUserId());
 		sender.sendEmail(user.getEmail(), "User successfully registered", "for User : \n" + user + "\n click on following link "
-				+ "to retrieve data : \n http://localhost:8080/user/findbyid/" + token );
+				+ "to retrieve data : \n http://localhost:8086/user/findbyid/" + token );
 		return user;
 	}
 	
@@ -62,7 +62,7 @@ public class UserService implements IUserService{
 			throw new UserException("There are no users with given id");
 		}
 		user.get().setPassword(dto.getPassword());
-		sender.sendEmail(user.get().getEmail(), "password successfully changed", "someone just logged in,in your account");
+		sender.sendEmail(user.get().getEmail(), "password successfully changed", "Your Password Has Changed");
 		return user.get(); 
 	}
 	
@@ -130,15 +130,4 @@ public class UserService implements IUserService{
 		return user.get();
 		
 	}
-	
-	
-	//-------------------------------services for Rest Template API-----------------------------------//
-	@Override
-	public User getByIdAPI(Integer userId) {
-		Optional<User> user = repo.findById(userId);
-		if(user.isEmpty()) {
-			throw new UserException("There are no users with given id");
-		}
-		return user.get();
-	}	
 }

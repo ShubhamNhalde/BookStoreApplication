@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bridgelabz.cart.dto.CartDTO;
-import com.bridgelabz.cart.dto.QuantityDTO;
 import com.bridgelabz.cart.dto.ResponseDTO;
 import com.bridgelabz.cart.model.Cart;
 import com.bridgelabz.cart.service.ICartService;
@@ -60,20 +59,13 @@ public class CartController {
 		ResponseDTO response = new ResponseDTO("cart updated : ", cart);
 		return new ResponseEntity<ResponseDTO>(response,HttpStatus.OK);
 	}
-	
-	//update quantity of books using cart id
-	@PutMapping("/updateQuantity")
-	public ResponseEntity<ResponseDTO> updateQuantity(@RequestBody QuantityDTO dto){
-		Cart cart = service.updateQuantity(dto);
-		ResponseDTO response = new ResponseDTO("Quantity updated :", cart);
-		return new ResponseEntity<ResponseDTO>(response,HttpStatus.OK);
-	}
-	
+
 	@DeleteMapping("/delete/{cartId}")
 	public ResponseEntity<ResponseDTO> deleteById(@PathVariable  Integer cartId){
 		Cart cart = service.deleteById(cartId);
 		ResponseDTO response = new ResponseDTO("cart deleted successfully",cart);
 		return new ResponseEntity<ResponseDTO>(response,HttpStatus.OK);
 	}
+
 	
 }

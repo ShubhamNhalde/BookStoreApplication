@@ -26,5 +26,7 @@ public interface IBookService {
 	List<Book> sortBooksDesc();
 
     Book updateBookQuantity(int bookId, int bookQuantity);
+
+    Book getbookByIdAPI(Integer bookId);
 	
 }

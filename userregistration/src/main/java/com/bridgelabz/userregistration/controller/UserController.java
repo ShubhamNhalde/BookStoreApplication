@@ -47,7 +47,7 @@ public class UserController {
 	//to reset password of user
 	@PutMapping("/resetpassword")
 	public ResponseEntity<ResponseDTO> changePassword(@Valid @RequestBody UserDTO dto){
-		ResponseDTO response = new ResponseDTO("User Login :", service.changePassword(dto));
+		ResponseDTO response = new ResponseDTO("Password Has Change :", service.changePassword(dto));
 		return new ResponseEntity<ResponseDTO>(response,HttpStatus.OK);
 	}
 	
@@ -88,14 +88,6 @@ public class UserController {
 	public ResponseEntity<ResponseDTO> deleteById(@PathVariable String token){
 		ResponseDTO response = new ResponseDTO("User deleted successfully",service.deleteById(token));
 		return new ResponseEntity<ResponseDTO>(response,HttpStatus.OK);
-	}
-	
-	//--------------------API Calls for RestTemplate----------------------------//
-	
-	@GetMapping("/findById/{userId}")
-	public User getByIdAPI(@PathVariable Integer userId){
-		User user =  service.getByIdAPI(userId);		
-		return user;
 	}
 	
 }

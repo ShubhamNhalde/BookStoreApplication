@@ -111,4 +111,16 @@ public class BookService implements IBookService {
         book.setQuantity(bookQuantity);
         return repo.save(book);
     }
+
+
+    //----------------------------service for rest template---------------//
+
+    @Override
+    public Book getbookByIdAPI(Integer bookId) {
+        Optional<Book> book = repo.findById(bookId);
+        if(book.isEmpty()) {
+            throw new BookException("There are no Books with given id");
+        }
+        return book.get();
+    }
 }

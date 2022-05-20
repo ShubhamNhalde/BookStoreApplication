@@ -12,19 +12,18 @@ import lombok.Setter;
 @Setter
 @Component
 public class EmailSenderService {
-	
-	
-	@Autowired
-	private JavaMailSender mailsender;
-	private String universalkey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9";
-	
-	public void sendEmail(String toEmail, String subject, String body ) {
-	SimpleMailMessage message=new SimpleMailMessage();
-	message.setFrom("piyushbarde1@gmail.com");
-	message.setTo(toEmail);
-	message.setText(body);
-	message.setSubject(subject);
-	mailsender.send(message);
-	System.out.println("Mail sent to the User...!");	
-	}
+
+
+    @Autowired
+    private JavaMailSender mailsender;
+
+    public void sendEmail(String toEmail, String subject, String body) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("nhaldes@gmail.com");
+        message.setTo(toEmail);
+        message.setText(body);
+        message.setSubject(subject);
+        mailsender.send(message);
+        System.out.println("Mail sent to the User...!");
+    }
 }

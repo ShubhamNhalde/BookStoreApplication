@@ -14,11 +14,11 @@ import com.auth0.jwt.interfaces.Verification;
 public class TokenUtil {
 
 
-	private static final String TOKEN_SECRET = "Tenzz";
+	private static final String TOKEN_SECRET = "Doorlock";
 	
 	public  String createToken(int id)   {
        try {
-        Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);	 
+        Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
         String token = JWT.create()
         .withClaim("user_id", id)
 	    .sign(algorithm);

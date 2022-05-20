@@ -101,4 +101,13 @@ public class BookController {
         return new ResponseEntity<ResponseDTO>(response, HttpStatus.OK);
     }
 
+    //---------------------------API for rest template---------------------------//
+
+    @GetMapping("/getBook/{bookId}")
+    public Book getbookByIdAPI(@PathVariable Integer bookId){
+        System.out.println("Test");
+        Book book = service.getbookByIdAPI(bookId);
+        return book;
+    }
+
 }
